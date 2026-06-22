@@ -1,3 +1,9 @@
+# Trabalho final PIE-V - Jogo Educativo e Ludico
+
+## Proposta 
+
+### [Documentação do projeto](https://drive.google.com/drive/u/2/folders/1Z9U8pYedcPm0KpiBdGozwl_4WV-sY12k)
+
 O projeto final compreende utilizar uma versão 'moderna' do COBOL para criar um jogo educativo, fins lúdico.
 
 
@@ -31,3 +37,31 @@ Hercules TK4/TK5 (Mainframe emulado)	Emuladores que rodam MVS 3.8j com compilado
 3) A submissão compreende fazer o upload em uma pasta do Google Drive, compartilhar com o tipo de acesso (IFTM) e incluir o link compartilhado.
 
 4) 
+
+## Dependencias
+
+- sdl2_dev
+- sdl2_ttf
+
+## Como rodar o projeto
+
+### Clonar o repositorio (caso não o tenha localmente ainda)
+`$ git clone git@github.com:oviccenzo/projeto-final-do-pie-5.git`
+
+### Compilar o projeto usando makefile
+`$ make`
+ou
+`$ make all`
+
+### Rodar o executavel
+`$ make run`
+
+### Deletar e limpar o execultavel (isso apaga o executavel do seu computador)
+`$ make clear`
+
+## Detalhes
+
+### O que é .PHONY no make file
+
+Ele indica que 'all', 'run' e 'clear' são nomes de ação(passos) e não arquivos do computador ou variaveis
+

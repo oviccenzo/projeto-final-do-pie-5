@@ -1,21 +1,31 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+COBC = cobc
 
-SRC = CPP/main.cpp
-TARGET = bin/main
+CPP_SRC = CPP/pong.cpp
+COB_SRC = Cobol/pong.cob
 
-SDLFLAGS = $(shell pkg-config --cflags --libs sdl2 SDL2_ttf)
+LIB = bin/libpongCPP.so
+EXE = bin/pong
 
-all: $(TARGET)
+SDL_FLAGS = $(shell pkg-config --cflags --libs sdl2 SDL2_ttf)
 
-$(TARGET): $(SRC)
+all: $(LIB) $(EXE)
+
+$(LIB): $(CPP_SRC)
 	mkdir -p bin
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET) $(SDLFLAGS)
+	$(CXX) -shared -fPIC $< -o $@ $(SDL_FLAGS)
 
-run: $(TARGET)
-	./$(TARGET)
+$(EXE): $(COB_SRC) $(LIB)
+	$(COBC) -x $< \
+		-Lbin \
+		-lpongCPP \
+		-lstdc++ \
+		-o $@
+
+run: all
+	LD_LIBRARY_PATH=bin ./$(EXE)
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(LIB) $(EXE)
 
 .PHONY: all run clean
